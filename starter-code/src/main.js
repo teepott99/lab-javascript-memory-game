@@ -26,7 +26,13 @@ var cards = [
 ];
 
 $(document).ready(function(){
+  // creates current game
   var memoryGame = new MemoryGame(cards);
+  // current game gets shuffled cards array
+  memoryGame.shuffleCard(memoryGame.cards);
+  
+
+
   var html = '';
   memoryGame.cards.forEach(function (pic, index) {
     html += '<div class= "card" id="card_' + pic.name + '">';
@@ -43,8 +49,35 @@ $(document).ready(function(){
   document.getElementById('memory_board').innerHTML = html;
   // Bind the click event of each element to a function
 $('.back').on('click', function () {
-   
+  $(this).addClass("just-clicked");
+  // $(this).addClass("blocked");
+  
+
+  //we are targetting the unique attribute(name) for each image
+   let nameOfTheImage = $(this).attr("name");
+  //  console.log("Name is: ", nameOfTheImage);  
+
+   //background: url("")
+   // using css we are targeting bg property and as second parameter we are passing url concat 
+   $(this).css("background", "url(img/" + nameOfTheImage + ")");
+memoryGame.pickedCards.push(nameOfTheImage);
+console.log("memoryGame.pickedCards: ", memoryGame.pickedCards)
+   if(memoryGame.pickedCards.length === 2) {
+    let firstInTheArr = memoryGame.pickedCards[0];
+    let secondInTheArr = memoryGame.pickedCards[1];
+    // console.log(firstInTheArr, secondInTheArr);
+  
+    memoryGame.checkIfPair(firstInTheArr, secondInTheArr);
+  };
+  
+
 });
+
+
 });
+// console.log("memoryGame.pickedCards", memoryGame, pickedCards);
+
+
+
 
 

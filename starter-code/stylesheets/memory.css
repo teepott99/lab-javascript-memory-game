@@ -67,3 +67,7 @@ p {
   font-size: 20px;
   text-align: center;
 }
+
+.blocked-for-real {
+  pointer-events: none;
+}
